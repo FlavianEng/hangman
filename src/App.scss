@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+
+$titles: 2em;
+$subTitles: 1.5em;
+$normal: 1em;
+
+.container {
+    font-family: 'Indie Flower', cursive;
+    display: flex;
+    flex-direction: column;
+}

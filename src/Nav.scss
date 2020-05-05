@@ -1,0 +1,19 @@
+@import 'App';
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    & h1 {
+        font-size: $titles;
+    }
+    & li {
+        color: #50514f;
+        display: inline-flex;
+        font-size: $subTitles;
+        padding: 10px;
+        margin: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
