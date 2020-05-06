@@ -1,11 +1,138 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
 
 $titles: 2em;
-$subTitles: 1.5em;
-$normal: 1em;
+$subTitles: 1.8em;
+$normal: 1.5em;
 
 .container {
     font-family: 'Indie Flower', cursive;
     display: flex;
     flex-direction: column;
+    align-content: center;
 }
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & h1 {
+        margin: 10px;
+        font-size: $titles;
+    }
+    & li {
+        color: #FFF;
+        display: inline-flex;
+        font-size: $subTitles;
+        padding: 10px;
+        margin: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.gameOutput {
+    font-size: $normal;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    height: 200px;
+    align-items: center;
+}
+
+.letters {
+    display: flex;
+    justify-content: space-between;
+    & p {
+        padding: 0px 5px;
+    }
+}
+
+.keyboard {
+    flex-basis: auto;
+    height: 220px;
+    align-items: center;
+    margin-top: 1em;
+    font-size: $normal;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    & li {
+        margin: 2px 8px;
+        padding: 2px 8px;
+        border: solid black;
+    }
+}
+
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: absolute;
+    width: 36px;
+    height: 30px;
+    top: 36px;
+    left: initial;
+    right: 36px;
+  }
+  
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: #000;
+  }
+  
+  /* Color/shape of burger icon bars on hover*/
+  .bm-burger-bars-hover {
+    background: #373a47;
+  }
+  
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: #FFF;
+  }
+  
+  /*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+  .bm-menu-wrap {
+    position: fixed;
+    height: 100%;
+  }
+  
+  /* General sidebar styles */
+  div.bm-menu {
+    overflow: hidden !important;
+  }
+  .bm-menu {
+    background: #000000;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+  
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
+  
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+  
+  /* Styling of overlay */
+  .bm-overlay {
+    background: (0, 0, 0, 0.3);
+  }

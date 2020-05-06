@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "../Nav.scss"
+        "../GamePattern.scss"
     ],
     "names": [],
-    "file": "Nav.min.css"
+    "file": "GamePattern.min.css"
 }

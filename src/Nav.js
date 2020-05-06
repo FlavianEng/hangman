@@ -1,21 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './css/Nav.min.css'
 
-const Nav = ({ title, modeNames }) => (
-    <div className="nav">
-        <h1>{title}</h1>
-        <div className="modeContainer">
-            {modeNames.map(({ id, name }) =>
-                (
-                    <li key={id}>{name}</li>
-                ))}
-        </div>
+const Nav = ({ modeNames }) => (
+    <div className="modeContainer">
+        {modeNames.map(({ id, name }) =>
+            (
+                <li key={id}>{name}</li>
+            ))}
     </div>
 )
 
 Nav.propTypes = {
-    title: PropTypes.string.isRequired,
     modeNames: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
