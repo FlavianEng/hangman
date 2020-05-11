@@ -10,15 +10,23 @@ import Button from './Button'
 const KEYLETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 class App extends Component {
-  state = {
-    title: "Pendu 💀",
-    lettersKey: this.generateKeyboard(),
-    attempts: 0,
-    wordLetters: this.generatePattern("Vikings"),
-    currentLetter: " ",
-    lettersFound: [],
-    winCondition: this.generateWinScore("Vikings"),
-    clickedKeys: []
+  constructor(props) {
+    super(props);
+
+    this.state = this.initialState;
+  }
+
+  get initialState() {
+    return {
+      title: "Hangman 💀",
+      lettersKey: this.generateKeyboard(),
+      attempts: 0,
+      wordLetters: this.generatePattern("a"),
+      currentLetter: "",
+      lettersFound: [],
+      winCondition: this.generateWinScore("a"),
+      clickedKeys: []
+    };
   }
 
   generatePattern(word) {
@@ -86,8 +94,8 @@ class App extends Component {
     }
   }
 
-  rebootGame() {
-
+  rebootGame = () => {
+    this.setState(this.initialState);
   }
 
   render() {
