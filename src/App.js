@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { scaleRotate as Menu } from 'react-burger-menu'
+import { push as Menu } from 'react-burger-menu'
 import './App.scss'
 import Nav, { MODES_LIST } from './Nav'
 import HangmanOutput from './HangmanOutput'
 import GamePattern from './GamePattern'
 import Alphabet from './Alphabet'
+import Button from './Button'
 
 const KEYLETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
@@ -13,10 +14,10 @@ class App extends Component {
     title: "Pendu 💀",
     lettersKey: this.generateKeyboard(),
     attempts: 0,
-    wordLetters: this.generatePattern("Coleoptere"),
+    wordLetters: this.generatePattern("Vikings"),
     currentLetter: " ",
     lettersFound: [],
-    winCondition: this.generateWinScore("Coleoptere"),
+    winCondition: this.generateWinScore("Vikings"),
     clickedKeys: []
   }
 
@@ -85,6 +86,10 @@ class App extends Component {
     }
   }
 
+  rebootGame() {
+
+  }
+
   render() {
     const { title, attempts, wordLetters, lettersKey, lettersFound, winCondition } = this.state
     const plurialBool = attempts > 1
@@ -110,11 +115,11 @@ class App extends Component {
               ))}
             </div>
           </div>
-          <div className="keyboard">
+          {!won ? (<div className="keyboard">
             {lettersKey.map((letter, index) => (
               <Alphabet key={index} letter={letter} status={this.getFeedbackForKeys(letter)} onClick={this.handleLetterClick} />
             ))}
-          </div>
+          </div>) : (<Button text="Rejouer 🎮" onClick={this.rebootGame} />)}
         </div>
       </div>
     )

@@ -3,12 +3,15 @@
 $titles: 2em;
 $subTitles: 1.8em;
 $normal: 1.5em;
+$font: 'Indie Flower', cursive;
+$breakpoint-tablet: 1200px;
 
 .container {
-    font-family: 'Indie Flower', cursive;
+    font-family: $font;
     display: flex;
     flex-direction: column;
     align-content: center;
+    height: 500px;
 }
 
 .nav {
@@ -31,6 +34,7 @@ $normal: 1.5em;
 }
 
 .hangmanOutput {
+  margin-top: 50px;
   & .win {
     display: flex;
     flex-direction: column;  
@@ -53,8 +57,6 @@ $normal: 1.5em;
     font-size: $normal;
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-basis: auto;
     height: 200px;
     align-items: center;
 }
@@ -62,7 +64,7 @@ $normal: 1.5em;
 .letters {
     display: flex;
     padding: 10px;
-    margin: 5px;
+    margin: 20px;
     justify-content: space-between;
     & p {
       font-weight: 900;
@@ -74,7 +76,7 @@ $normal: 1.5em;
     flex-basis: auto;
     height: 220px;
     align-items: center;
-    margin: 1em;
+    margin: 3em 1em 0 1em;
     font-size: $normal;
     display: flex;
     justify-content: center;
@@ -86,7 +88,6 @@ $normal: 1.5em;
         padding: 2px 8px;
         border: solid black 1px;
         border-radius: .2em;
-        box-shadow: 0px 0px 5px #7C7C7C;
     }
   & .clicked {
     display: none;
@@ -96,6 +97,54 @@ $normal: 1.5em;
   }
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  & button {
+    cursor: pointer;
+    padding: 10px;
+    font-family: $font;
+    font-size: $normal;
+    font-weight: 900;
+    border: solid black 2px;
+    background: none;
+    border-radius: .2em;
+    transform: translateY(0px);
+    &:hover {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+  }
+}
+
+
+@media (max-width: $breakpoint-tablet) {
+  .nav {
+    margin-top: 30px;
+  }
+  .gameOutput {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: $breakpoint-tablet + 1) {
+  .nav {
+    margin-top: 10px;
+  }
+  .gameOutput {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+
+
+
+
+
+
 
 
 
@@ -104,7 +153,7 @@ $normal: 1.5em;
     position: absolute;
     width: 36px;
     height: 30px;
-    top: 36px;
+    top: 25px;
     left: initial;
     right: 36px;
   }
