@@ -39,6 +39,9 @@ $breakpoint-tablet: 1200px;
 
 .hangmanOutput {
   margin-top: 50px;
+  // & p {
+  //   margin: 0;
+  // }
   & .win {
     display: flex;
     flex-direction: column;  
@@ -68,7 +71,7 @@ $breakpoint-tablet: 1200px;
 .letters {
     display: flex;
     padding: 10px;
-    margin: 20px;
+    // margin: 20px;
     justify-content: space-between;
     & p {
       font-weight: 900;
@@ -80,7 +83,7 @@ $breakpoint-tablet: 1200px;
     flex-basis: auto;
     height: 220px;
     align-items: center;
-    margin: 3em 1em 0 1em;
+    margin: 1em 1em 0 1em;
     font-size: $normal;
     display: flex;
     justify-content: center;
@@ -124,11 +127,6 @@ $breakpoint-tablet: 1200px;
 
 
 @media (max-width: $breakpoint-tablet) {
-  // .nav {
-  //   & h1 {
-  //     margin-top: 30px;
-  //   }
-  // }
   .gameOutput {
     flex-direction: column;
     flex-wrap: nowrap;

@@ -6,6 +6,7 @@ import HangmanOutput from './HangmanOutput'
 import GamePattern from './GamePattern'
 import Alphabet from './Alphabet'
 import Button from './Button'
+// import { WORD_DICTIONNARY } from './wordDictionnary'
 
 const KEYLETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
@@ -21,13 +22,19 @@ class App extends Component {
       title: "Hangman 💀",
       lettersKey: this.generateKeyboard(),
       attempts: 0,
-      wordLetters: this.generatePattern("a"),
+      wordLetters: this.generatePattern("Perpendiculaire"),
       currentLetter: "",
       lettersFound: [],
-      winCondition: this.generateWinScore("a"),
-      clickedKeys: []
+      winCondition: this.generateWinScore("Perpendiculaire"),
+      clickedKeys: [],
+      // leMot: this.chooseRandomWord()
     };
   }
+
+  // chooseRandomWord() {
+  //   let randomNumber = Math.floor(Math.random() * (WORD_DICTIONNARY.length - 0 + 1));
+  //   return WORD_DICTIONNARY[randomNumber]
+  // }
 
   generatePattern(word) {
     const result = []
