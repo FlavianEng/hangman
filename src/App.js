@@ -4,24 +4,91 @@ import './App.scss'
 import Nav, { MODES_LIST } from './Nav'
 import HangmanOutput from './HangmanOutput'
 import GamePattern from './GamePattern'
-import Alphabet, { ALPHABET } from './Alphabet'
+import Alphabet from './Alphabet'
+
+const KEYLETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 class App extends Component {
   state = {
-    title: "Hangman",
+    title: "Pendu 💀",
+    lettersKey: this.generateKeyboard(),
     attempts: 0,
-    letters: this.generatePattern("Exploration")
+    wordLetters: this.generatePattern("Coleoptere"),
+    currentLetter: " ",
+    lettersFound: [],
+    winCondition: this.generateWinScore("Coleoptere"),
+    clickedKeys: []
   }
 
   generatePattern(word) {
-    let letters = word.toUpperCase()
-    letters = letters.split('')
-    return letters
+    const result = []
+    let str = word.toUpperCase()
+    str = str.split('')
+    for (let letter of str) {
+      result.push(letter)
+    }
+    return result
+  }
+
+  generateKeyboard() {
+    const result = []
+    for (let letter of KEYLETTERS) {
+      result.push(letter)
+    }
+    return result
+  }
+
+  generateWinScore(word) {
+    let referenceWord = word.toUpperCase()
+    referenceWord = referenceWord.split('')
+    let result = 0
+    const list = []
+    for (let letter of referenceWord) {
+      if (list.includes(letter)) {
+      } else {
+        result = result + 1
+        list.push(letter)
+      }
+    }
+    return result
+  }
+
+  getFeedbackForPattern(letter) {
+    const { lettersFound } = this.state
+
+    const letterMatched = lettersFound.includes(letter)
+    for (let character of lettersFound) {
+      if (character === letter) {
+        return letterMatched ? 'visible' : 'hidden'
+      }
+    }
+    return letterMatched ? 'visible' : 'hidden'
+  }
+
+  getFeedbackForKeys(letter) {
+    const { clickedKeys } = this.state
+    const keysMatched = clickedKeys.includes(letter)
+    for (let key of clickedKeys) {
+      if (key === letter) {
+        return keysMatched ? 'clicked' : 'clickable'
+      }
+    }
+    return keysMatched ? 'clicked' : 'clickable'
+  }
+
+  handleLetterClick = letter => {
+    const { wordLetters, lettersFound, attempts, clickedKeys } = this.state
+    const newAttempts = attempts + 1;
+    this.setState({ currentLetter: letter, attempts: newAttempts, clickedKeys: [...clickedKeys, letter] })
+    if (wordLetters.includes(letter)) {
+      this.setState({ lettersFound: [...lettersFound, letter] })
+    }
   }
 
   render() {
-    const { attempts, letters, title } = this.state
+    const { title, attempts, wordLetters, lettersKey, lettersFound, winCondition } = this.state
     const plurialBool = attempts > 1
+    const won = lettersFound.length === winCondition
     return (
       <div className="container" id="outer-container">
         <div className="nav">
@@ -32,18 +99,22 @@ class App extends Component {
         </div>
         <div id="page-wrap">
           <div className="gameOutput">
-            <HangmanOutput attempts={attempts} plurial={plurialBool} />
+            <HangmanOutput attempts={attempts} plurial={plurialBool} winStatus={won} />
             <div className="letters">
-              {letters.map((letter, index) => (
+              {wordLetters.map((letter, index) => (
                 <GamePattern
-                  letter={letter}
                   key={index}
-                  feedback="unfound"
+                  letter={letter}
+                  feedback={this.getFeedbackForPattern(letter)}
                 />
               ))}
             </div>
           </div>
-          <Alphabet characters={ALPHABET} />
+          <div className="keyboard">
+            {lettersKey.map((letter, index) => (
+              <Alphabet key={index} letter={letter} status={this.getFeedbackForKeys(letter)} onClick={this.handleLetterClick} />
+            ))}
+          </div>
         </div>
       </div>
     )
