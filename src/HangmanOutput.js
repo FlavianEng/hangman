@@ -7,7 +7,8 @@ const HangmanOutput = ({ plurial, attempts, winStatus }) => (
         {winStatus &&
             <div className="win">
                 <p><span aria-label="trophée" role="img">🏆</span> Tu as enfin gagné !</p>
-                <p className="win_little">(Je commençais à perdre patience)</p>
+                {/* <p className="win_little">(Je commençais à perdre patience)</p> */}
+                <p className="win_little">(Tu peux faire mieux champion !)</p>
             </div>}
     </div>
 )
