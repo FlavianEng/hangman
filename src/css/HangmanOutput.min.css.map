@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../HangmanOutput.scss"
-    ],
-    "names": [],
-    "file": "HangmanOutput.min.css"
-}

@@ -396,8 +396,6 @@ export const WORD_DICTIONNARY = [
     "aveu",
     "aviaire",
     "coleoptere",
-    "azimut",
-    "babine",
     "babiole",
     "babouche",
     "babouin",
@@ -448,7 +446,6 @@ export const WORD_DICTIONNARY = [
     "baudroie",
     "baudruche",
     "maya",
-    "Iceberg",
     "caca",
     "Roucouler",
     "mains",
@@ -458,6 +455,5 @@ export const WORD_DICTIONNARY = [
     "vaudouisme",
     "becqueter",
     "beffroi",
-    "CAMESCOPE"
-
+    "CAMESCOPE",
 ]
