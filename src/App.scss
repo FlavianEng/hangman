@@ -38,7 +38,7 @@ $breakpoint-tablet: 1200px;
 }
 
 .hangmanOutput {
-  margin-top: 50px;
+  margin-top: 30px;
   & .win {
     display: flex;
     flex-direction: column;  
@@ -55,6 +55,9 @@ $breakpoint-tablet: 1200px;
       font-style: italic;
     }
   }
+  // & #hangmanCanvas {
+  //   border: 2px solid blue;
+  // }
 }
 
 .gameOutput {
@@ -126,6 +129,17 @@ $breakpoint-tablet: 1200px;
   .gameOutput {
     flex-direction: column;
     flex-wrap: nowrap;
+    & .svgHangman {
+      margin-top: -30px;
+      width: 100px;
+    }
+  }
+
+  .hangmanOutput {
+    & #hangmanCanvas {
+      width: 100px;
+      height: 100px;  
+    }
   }
 }
 
@@ -136,6 +150,16 @@ $breakpoint-tablet: 1200px;
   .gameOutput {
     flex-direction: row;
     flex-wrap: wrap;
+    & .svgHangman {
+      width: 150px;
+    }
+  }
+
+  .hangmanOutput {
+    & #hangmanCanvas {
+      width: 151px;
+      height: 151px;  
+    }
   }
 }
 

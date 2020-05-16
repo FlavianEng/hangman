@@ -19,6 +19,7 @@ class App extends Component {
   initialState(theWord) {
     return {
       title: "Hangman 💀",
+      mode: 0,
       lettersKey: this.generateKeyboard(),
       attempts: 0,
       wordLetters: this.generatePattern(theWord),
@@ -26,6 +27,18 @@ class App extends Component {
       lettersFound: [],
       winCondition: this.generateWinScore(theWord),
       clickedKeys: [],
+    };
+  }
+
+  resetState(theWord) {
+    return {
+      lettersKey: this.generateKeyboard(),
+      attempts: 0,
+      wordLetters: this.generatePattern(theWord),
+      currentLetter: "",
+      lettersFound: [],
+      winCondition: this.generateWinScore(theWord),
+      clickedKeys: []
     };
   }
 
@@ -92,19 +105,99 @@ class App extends Component {
 
   handleLetterClick = letter => {
     const { wordLetters, lettersFound, attempts, clickedKeys } = this.state
-    const newAttempts = attempts + 1;
-    this.setState({ currentLetter: letter, attempts: newAttempts, clickedKeys: [...clickedKeys, letter] })
+    this.setState({ currentLetter: letter, clickedKeys: [...clickedKeys, letter] })
     if (wordLetters.includes(letter)) {
       this.setState({ lettersFound: [...lettersFound, letter] })
+    } else {
+      const newAttempts = attempts + 1;
+      this.setState({ attempts: newAttempts })
     }
   }
 
   rebootGame = () => {
-    this.setState(this.initialState(this.chooseRandomWord()))
+    this.setState(this.resetState(this.chooseRandomWord()))
+  }
+
+  setGameMode = id => {
+    this.setState({ mode: id })
+  }
+
+  componentDidMount() {
+    const canvas = document.getElementById('hangmanCanvas')
+    const ctx = canvas.getContext('2d')
+    ctx.fillRect(0, 147, 110, 3)
+
+    // SUPPRIMER EN DESSOUS
+    ctx.fillRect(45, 50, 6, 150)
+    ctx.fillRect(45, 50, 150, 3)
+    ctx.fillRect(195, 50, 6, 20)
+
+    // SUPPRIMER EN DESSOUS
+    ctx.beginPath()
+    ctx.moveTo(50, 120)
+    ctx.lineTo(147, 180)
+    ctx.stroke()
+    ctx.lineTo(146, 179)
+    ctx.stroke();
+    ctx.lineTo(145, 178)
+    ctx.stroke()
+    ctx.lineTo(144, 177)
+    ctx.stroke()
+    ctx.lineTo(143, 176)
+    ctx.stroke()
+    ctx.closePath()
+  }
+
+  componentDidUpdate() {
+    const { mode } = this.state
+    const isZero = mode === 0
+    if (isZero) {
+      const { attempts } = this.state
+      const canvas = document.getElementById('hangmanCanvas')
+      const ctx = canvas.getContext('2d')
+
+      // const maxAttempts = 11
+      switch (attempts) {
+        case 1:
+          ctx.fillRect(45, 50, 6, 150)
+          break
+        case 2:
+          ctx.fillRect(45, 50, 150, 3)
+          break
+        case 3:
+          ctx.fillRect(195, 50, 6, 20)
+          break
+        case 4:
+          ctx.beginPath()
+          ctx.moveTo(0, 0)
+          ctx.lineTo(10, 130)
+          ctx.closePath()
+          ctx.fill()
+          break
+        case 5:
+          ctx.beginPath()
+          ctx.moveTo(50, 120)
+          ctx.lineTo(147, 180)
+          ctx.stroke()
+          ctx.lineTo(146, 179)
+          ctx.stroke();
+          ctx.lineTo(145, 178)
+          ctx.stroke()
+          ctx.lineTo(144, 177)
+          ctx.stroke()
+          ctx.lineTo(143, 176)
+          ctx.stroke()
+          ctx.closePath()
+          break
+        default:
+          console.log("IN THE DEFAULT")
+      }
+    } else { console.log('isZero FALSE') }
+    // return true
   }
 
   render() {
-    const { title, attempts, wordLetters, lettersKey, lettersFound, winCondition } = this.state
+    const { title, attempts, wordLetters, lettersKey, lettersFound, winCondition, mode } = this.state
     const plurialBool = attempts > 1
     const won = lettersFound.length === winCondition
     return (
@@ -112,12 +205,12 @@ class App extends Component {
         <div className="nav">
           <h1>{title}</h1>
           <Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} right >
-            <Nav title="Hangman" modeNames={MODES_LIST} />
+            <Nav title="Hangman" onClick={this.setGameMode} modeNames={MODES_LIST} />
           </Menu>
         </div>
         <div id="page-wrap">
           <div className="gameOutput">
-            <HangmanOutput attempts={attempts} plurial={plurialBool} winStatus={won} />
+            <HangmanOutput attempts={attempts} plurial={plurialBool} winStatus={won} mode={mode} />
             <div className="letters">
               {wordLetters.map((letter, index) => (
                 <GamePattern
