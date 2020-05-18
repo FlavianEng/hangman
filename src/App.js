@@ -115,6 +115,13 @@ class App extends Component {
   }
 
   rebootGame = () => {
+    const { mode } = this.state
+    if (mode === 0) {
+      const canvas = document.getElementById('hangmanCanvas')
+      const ctx = canvas.getContext('2d')
+      ctx.clearRect(0, 0, 300, 300)
+      ctx.fillRect(0, 147, 110, 3)
+    }
     this.setState(this.resetState(this.chooseRandomWord()))
   }
 
@@ -126,40 +133,7 @@ class App extends Component {
     const canvas = document.getElementById('hangmanCanvas')
     const ctx = canvas.getContext('2d')
     ctx.fillRect(0, 147, 110, 3)
-
-    // SUPPRIMER EN DESSOUS
-    ctx.fillRect(45, 50, 6, 150)
-    ctx.fillRect(45, 50, 150, 3)
-    ctx.fillRect(195, 50, 4, 20)
-    ctx.beginPath()
-    ctx.moveTo(50, 120)
-    ctx.lineTo(147, 180)
-    ctx.stroke()
-    ctx.lineTo(146, 179)
-    ctx.stroke()
-    ctx.lineTo(145, 178)
-    ctx.stroke()
-    ctx.lineTo(144, 177)
-    ctx.stroke()
-    ctx.lineTo(143, 176)
-    ctx.stroke()
-    ctx.moveTo(100, 52)
-    ctx.lineTo(50, 80)
-    ctx.stroke()
-    ctx.lineTo(49, 79)
-    ctx.stroke()
-    ctx.lineTo(48, 78)
-    ctx.stroke()
-    ctx.lineTo(47, 77)
-    ctx.stroke()
-    ctx.closePath()
-    ctx.beginPath()
-    ctx.arc(197, 80, 10, 0, 2 * Math.PI);
-    ctx.stroke();
-    ctx.closePath()
-    // SUPPRIMER EN DESSOUS
   }
-
 
   componentDidUpdate() {
     const { mode } = this.state
@@ -211,10 +185,43 @@ class App extends Component {
         case 6:
           ctx.beginPath();
           ctx.arc(197, 80, 10, 0, 2 * Math.PI);
-          ctx.stroke();
+          ctx.stroke()
           ctx.closePath()
           break
         case 7:
+          ctx.beginPath()
+          ctx.moveTo(197, 90)
+          ctx.lineTo(197, 130)
+          ctx.stroke()
+          ctx.closePath()
+          break
+        case 8:
+          ctx.beginPath()
+          ctx.moveTo(197, 100)
+          ctx.lineTo(160, 90)
+          ctx.stroke()
+          ctx.closePath()
+          break
+        case 9:
+          ctx.beginPath()
+          ctx.moveTo(197, 100)
+          ctx.lineTo(230, 90)
+          ctx.stroke()
+          ctx.closePath()
+          break
+        case 10:
+          ctx.beginPath()
+          ctx.moveTo(197, 130)
+          ctx.lineTo(180, 145)
+          ctx.stroke()
+          ctx.closePath()
+          break
+        case 11:
+          ctx.beginPath()
+          ctx.moveTo(197, 130)
+          ctx.lineTo(210, 145)
+          ctx.stroke()
+          ctx.closePath()
           break
         default:
           console.log("IN THE DEFAULT")
