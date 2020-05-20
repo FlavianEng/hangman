@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 
-const HangmanOutput = ({ plurial, attempts, winStatus, mode }) => (
+const HangmanOutput = ({ plurial, attempts, winStatus, mode, lostStatus }) => (
     <div className="hangmanOutput">
         {mode === 1 ?
             (<p>
@@ -15,16 +15,24 @@ const HangmanOutput = ({ plurial, attempts, winStatus, mode }) => (
                 </canvas>
             )}
         {winStatus &&
-            <div className="win">
+            <div className="winLostStatus">
                 <p><span aria-label="trophée" role="img">🏆</span> Tu as enfin gagné !</p>
-                <p className="win_little">(Je commençais à perdre patience)</p>
+                <p className="winLostStatus_little">(J'aurais parié que tu allais perdre)</p>
             </div>}
+
+        {lostStatus &&
+            <div className="winLostStatus">
+                <p><span aria-label="Looser !" role="img">💩</span> Tu as perdu !</p>
+                <p className="winLostStatus_little">(Même ma plante aurait fait mieux)</p>
+            </div>
+        }
     </div>
 )
 
 HangmanOutput.propTypes = {
     attempts: PropTypes.number.isRequired,
     winStatus: PropTypes.bool.isRequired,
+    lostStatus: PropTypes.bool.isRequired,
     mode: PropTypes.number.isRequired
 }
 

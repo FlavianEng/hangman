@@ -38,13 +38,19 @@ $breakpoint-tablet: 1200px;
 }
 
 .hangmanOutput {
-  margin-top: 30px;
-  & .win {
+  margin: 30px 0px 60px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  & canvas {
+    align-self: center;
+  }
+  & .winLostStatus {
     display: flex;
     flex-direction: column;  
     color: #0464EF;
     font-weight: 900;
-    & p {
+    & p{
       align-self: center;
       margin: 0;
     }
@@ -55,9 +61,6 @@ $breakpoint-tablet: 1200px;
       font-style: italic;
     }
   }
-  // & #hangmanCanvas {
-  //   border: 2px solid blue;
-  // }
 }
 
 .gameOutput {

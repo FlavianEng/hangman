@@ -457,4 +457,6 @@ export const WORD_DICTIONNARY = [
     "beffroi",
     "CAMESCOPE",
     "vaurien",
+    "crado",
+    "parking"
 ]

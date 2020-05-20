@@ -26,7 +26,7 @@ class App extends Component {
       currentLetter: "",
       lettersFound: [],
       winCondition: this.generateWinScore(theWord),
-      clickedKeys: [],
+      clickedKeys: []
     };
   }
 
@@ -81,13 +81,17 @@ class App extends Component {
   }
 
   getFeedbackForPattern(letter) {
-    const { lettersFound } = this.state
+    const { lettersFound, attempts, mode } = this.state
 
     const letterMatched = lettersFound.includes(letter)
+
     for (let character of lettersFound) {
       if (character === letter) {
         return letterMatched ? 'visible' : 'hidden'
       }
+    }
+    if (mode === 0 && attempts >= 11) {
+      return 'visible'
     }
     return letterMatched ? 'visible' : 'hidden'
   }
@@ -115,13 +119,10 @@ class App extends Component {
   }
 
   rebootGame = () => {
-    const { mode } = this.state
-    if (mode === 0) {
-      const canvas = document.getElementById('hangmanCanvas')
-      const ctx = canvas.getContext('2d')
-      ctx.clearRect(0, 0, 300, 300)
-      ctx.fillRect(0, 147, 110, 3)
-    }
+    const canvas = document.getElementById('hangmanCanvas')
+    const ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, 300, 300)
+    ctx.fillRect(0, 147, 110, 3)
     this.setState(this.resetState(this.chooseRandomWord()))
   }
 
@@ -143,8 +144,11 @@ class App extends Component {
       const canvas = document.getElementById('hangmanCanvas')
       const ctx = canvas.getContext('2d')
 
-      // const maxAttempts = 11
       switch (attempts) {
+        case 0:
+          ctx.clearRect(0, 0, 300, 300)
+          ctx.fillRect(0, 147, 110, 3)
+          break
         case 1:
           ctx.fillRect(45, 50, 6, 150)
           break
@@ -224,15 +228,17 @@ class App extends Component {
           ctx.closePath()
           break
         default:
-          console.log("IN THE DEFAULT")
+          console.error('Something wrong happened, please reload')
       }
-    } else { console.log('isZero FALSE') }
+    }
   }
 
   render() {
     const { title, attempts, wordLetters, lettersKey, lettersFound, winCondition, mode } = this.state
     const plurialBool = attempts > 1
     const won = lettersFound.length === winCondition
+    const lost = attempts >= 11 && mode === 0
+    const endedGame = won || lost
     return (
       <div className="container" id="outer-container">
         <div className="nav">
@@ -243,7 +249,7 @@ class App extends Component {
         </div>
         <div id="page-wrap">
           <div className="gameOutput">
-            <HangmanOutput attempts={attempts} plurial={plurialBool} winStatus={won} mode={mode} />
+            <HangmanOutput attempts={attempts} plurial={plurialBool} winStatus={won} mode={mode} lostStatus={lost} />
             <div className="letters">
               {wordLetters.map((letter, index) => (
                 <GamePattern
@@ -254,7 +260,7 @@ class App extends Component {
               ))}
             </div>
           </div>
-          {!won ? (<div className="keyboard">
+          {!endedGame ? (<div className="keyboard">
             {lettersKey.map((letter, index) => (
               <Alphabet key={index} letter={letter} status={this.getFeedbackForKeys(letter)} onClick={this.handleLetterClick} />
             ))}
