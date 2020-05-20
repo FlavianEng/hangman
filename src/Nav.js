@@ -26,5 +26,5 @@ export default Nav
 export const MODES_LIST = [
     { id: 0, name: 'Classique' },
     { id: 1, name: 'Record' },
-    { id: 2, name: 'Multijoueur', }
+    // { id: 2, name: 'Multijoueur', }
 ]
